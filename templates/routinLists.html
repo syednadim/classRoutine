@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %} Routin Lists {% endblock %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Routine Lists</h1>
+    <a href="{% url 'main:createroutine' %}"  class="d-sm-inline-block btn btn-sm btn-primary shadow-sm mt-2">Create new routine</a>
+</div>
+
+<div class="row justify-content-center mt-5">
+    <div class="col justify-content-between">
+        {% if routins%}
+        <div class="col-xl-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">List of Routines</h6>
+                </div>
+                <div class="card-body">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                              <tr>
+                                <th>Class</th>
+                                <th>Subject</th>
+                                <th>Teacher</th>
+                                <th>Start </th>
+                                <th>End </th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            
+                            <tbody id="myTable">
+                                {% for item in routins%}
+                                    <tr>
+                                        <td>{{item.ClassRoom}}</td>
+                                        <td>{{item.subject}}</td>
+                                        <td>{{item.teacher}}</td>
+                                        <td>{{item.start}}</td>
+                                        <td>{{item.end}}</td>
+                                        
+                                        <td>
+                                            <a class="btn btn-danger btn-circle" href="{% url 'main:deleteroutine' item.routineid %}"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
